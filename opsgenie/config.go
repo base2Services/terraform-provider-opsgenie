@@ -21,7 +21,7 @@ func (c *Config) Client() (*OpsgenieClient, error) {
 		ApiKey:         c.ApiKey,
 		RetryCount:     10,
 		OpsGenieAPIURL: client.ApiUrl(c.ApiUrl),
-		Backoff:        retryablehttp.DefaultBackoff,
+		Backoff:        retryablehttp.LinearJitterBackoff,
 	}
 	ogCli, err := client.NewOpsGenieClient(config)
 	if err != nil {
